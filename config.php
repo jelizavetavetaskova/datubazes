@@ -11,7 +11,7 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 } 
 
-$query = "use datorkursi2";
+$query = "use datorkursi3";
 $result = $conn->query($query);
 
 

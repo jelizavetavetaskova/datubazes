@@ -17,22 +17,16 @@
         $res = $conn->query($sql);
         $fieldnames = $res->fetch_fields();
 
+        echo "<table>";
+        echo "<tr>";
         foreach($fieldnames as $fieldname) {
-            echo $firldname->$fieldname." ";
+            echo "<th>";
+            echo $fieldname->name." ";
+            echo "</th>";
         }
+        echo "</tr>";
+        echo "</table>"
 
-        // echo "<br>Tabula: ".$table;
-            /* $sql = "show full tabl
-            es from datorkursi2 where Table_type = 'BASE TABLE'";
-            $result = $conn->query($sql);
-
-            
-            while ($string = $result->fetch_assoc()) {
-                echo "<li>".$string["Tables_in_datorkursi2"]."</li>";
-                // echo "<br>";
-            }
-            // $string = $result->fetch_assoc();
-            // print_r($string);*/
         ?> 
 </body>
 </html>
