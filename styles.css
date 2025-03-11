@@ -1,0 +1,31 @@
+body {
+    background-color: #fef9e7;
+}
+
+h1 {
+    color: #1a5276;
+    text-align: center;
+}
+
+.text {
+    margin-left: 60px;
+    margin-right: 60px;
+    background-color: #d5f5e3;
+    font-size: 24px;
+}
+
+.image {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 40%;
+}
+
+.tablelist {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background-color: #d5f5e3;
+    font-size: 24px;
+    width: 40%;
+}
