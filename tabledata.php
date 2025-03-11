@@ -16,7 +16,7 @@
             $sql = "show full tables from datorkursi2 where Table_type = 'BASE TABLE'";
             $result = $conn->query($sql);
 
-            echo '<form action="/data.php" method="post">
+            echo '<form action="showdata.php" method="post">
                  <label for="tables">Izvēlieties tabulu:</label>
                  <select name="tables">';
 
