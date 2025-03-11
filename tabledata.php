@@ -13,7 +13,7 @@
     <ol class="tablelist">
         <?php
             require_once("config.php");
-            $sql = "show full tables from datorkursi2 where Table_type = 'BASE TABLE'";
+            $sql = "show full tables from datorkursi3 where Table_type = 'BASE TABLE'";
             $result = $conn->query($sql);
 
             echo '<form action="showdata.php" method="post">
@@ -21,20 +21,13 @@
                  <select name="tables">';
 
             while ($string = $result->fetch_assoc()) {
-                echo '<option value="'.$string["Tables_in_datorkursi2"].'">'.$string["Tables_in_datorkursi2"].'</option>';
+                echo '<option value="'.$string["Tables_in_datorkursi3"].'">'.$string["Tables_in_datorkursi3"].'</option>';
             };
 
 echo '</select>
   <br><br>
   <input type="submit" value="Apskatīt datus">
 </form>';
-            
-            while ($string = $result->fetch_assoc()) {
-                // echo "<li>".$string["Tables_in_datorkursi2"]."</li>";
-                // echo "<br>";
-            }
-            // $string = $result->fetch_assoc();
-            // print_r($string);
         ?>
     </ol>
 </body>
