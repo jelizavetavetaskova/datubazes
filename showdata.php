@@ -25,6 +25,16 @@
             echo "</th>";
         }
         echo "</tr>";
+
+        while ($row = $res->fetch_assoc()) {
+            echo "<tr>";
+            foreach($row as $data) {
+                echo "<td>";
+                echo $data;
+                echo "</td>";
+            }
+            echo "</tr>";
+        }
         echo "</table>"
 
         ?> 
