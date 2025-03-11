@@ -13,7 +13,10 @@
         require_once("config.php");
         $table = $_POST['tables'];
         echo '<h1>Tabulas '.$table.' dati</h1>';
-        echo "<br>Tabula: ".$table;
+        $sql="select * from ".$table.";";
+        $res = $conn->query($sql);
+
+        // echo "<br>Tabula: ".$table;
             /* $sql = "show full tabl
             es from datorkursi2 where Table_type = 'BASE TABLE'";
             $result = $conn->query($sql);
