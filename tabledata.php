@@ -16,11 +16,15 @@
             $sql = "show full tables from datorkursi2 where Table_type = 'BASE TABLE'";
             $result = $conn->query($sql);
 
-            echo '<form action="/data.php">
-  <label for="tables">Izvēlieties tabulu:</label>
-  <select name="tables">
-    <option value="volvo">Volvo</option>
-  </select>
+            echo '<form action="/data.php" method="get">
+                 <label for="tables">Izvēlieties tabulu:</label>
+                 <select name="tables">';
+
+            while ($string = $result->fetch_assoc()) {
+                echo '<option value="'.$string["Tables_in_datorkursi2"].'">'.$string["Tables_in_datorkursi2"].'</option>';
+            };
+
+echo '</select>
   <br><br>
   <input type="submit" value="Apskatīt datus">
 </form>';
