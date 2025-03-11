@@ -15,6 +15,11 @@
         echo '<h1>Tabulas '.$table.' dati</h1>';
         $sql="select * from ".$table.";";
         $res = $conn->query($sql);
+        $fieldnames = $res->fetch_fields();
+
+        foreach($fieldnames as $fieldname) {
+            echo $firldname->$fieldname." ";
+        }
 
         // echo "<br>Tabula: ".$table;
             /* $sql = "show full tabl
