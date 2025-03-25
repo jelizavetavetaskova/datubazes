@@ -34,8 +34,10 @@
 
             echo '<form action="" method="post">
             <label for="tables">Izvēlieties tabulu:</label>
-            <select name="tables">';
+            <select name="tables" required>';
 
+
+            echo '<option value="" disabled selected value> </option>';
             while ($string = $result->fetch_assoc()) {
                 echo '<option value="'.$string["Tables_in_datorkursi3"].'">'.$string["Tables_in_datorkursi3"].'</option>';
             };
