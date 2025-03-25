@@ -60,3 +60,7 @@ tr:nth-child(even) {
 tr:hover {
     background-color: #ddd;
 }
+
+.without-symbol {
+    list-style-type: none;
+}
