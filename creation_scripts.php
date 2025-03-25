@@ -40,7 +40,9 @@
                 $result = $conn->query($sql);
                 $string = $result->fetch_assoc();
                 // print_r($string);
+                echo "<pre>";
                 echo $string["Create Table"];
+                echo "</pre>";
             }
         ?>
 
