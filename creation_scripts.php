@@ -17,6 +17,7 @@
             if (isset($_POST["submit"])) {
                 // ja bija nospiesta submit poga
                 $table = $_POST["tables"];
+                echo "<h3>Tabulas '".$table."' izveides skripts</h3>";
                 $sql = "show create table ".$table;
                 // echo "<br>".$sql;
                 $result = $conn->query($sql);
@@ -27,6 +28,7 @@
                 echo "</pre>";
             }
 
+            echo "<br><hr><br>";
             $sql = "show full tables from datorkursi3 where Table_type = 'BASE TABLE'";
             $result = $conn->query($sql);
 
@@ -38,12 +40,10 @@
                 echo '<option value="'.$string["Tables_in_datorkursi3"].'">'.$string["Tables_in_datorkursi3"].'</option>';
             };
                 
-
             echo '</select>
             <br><br>
             <input type="submit" value="Apskatīt datus" name="submit">
             </form>';
-                
         ?>
 
 </body>

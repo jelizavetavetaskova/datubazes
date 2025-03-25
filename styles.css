@@ -2,9 +2,15 @@ body {
     background-color: #fef9e7;
 }
 
-h1 {
+h1, h2 {
     color: #1a5276;
     text-align: center;
+}
+
+
+hr {
+    width: 60%;
+    margin-left: 0;
 }
 
 .text {
