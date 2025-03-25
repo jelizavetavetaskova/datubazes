@@ -26,8 +26,36 @@
             $sql_query = $_POST["query"];
 
             switch($sql_query) {
-                case "1. vaicājums" : echo "1. vaicājums"; 
-                                      break;
+                case "1. vaicājums" : 
+                    $sql = "select nosaukums, cena from kursi";
+                    echo "<pre>"; 
+                    echo $sql;
+                    echo "</pre>";
+
+                    $res = $conn->query($sql);
+                    $fieldnames = $res->fetch_fields();
+            
+                    echo "<table>";
+                    echo "<tr>";
+                    foreach($fieldnames as $fieldname) {
+                        echo "<th>";
+                        echo $fieldname->name." ";
+                        echo "</th>";
+                    }
+                    echo "</tr>";
+            
+                    while ($row = $res->fetch_assoc()) {
+                        echo "<tr>";
+                        foreach($row as $data) {
+                            echo "<td>";
+                            echo $data;
+                            echo "</td>";
+                        }
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+
+                    break;
 
                 default: echo "Pēc nokluējuma";
             }
