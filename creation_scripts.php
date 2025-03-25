@@ -36,7 +36,11 @@
                 // ja bija nospiesta submit poga
                 $table = $_POST["tables"];
                 $sql = "show create table ".$table;
-                echo "<br>".$sql;
+                // echo "<br>".$sql;
+                $result = $conn->query($sql);
+                $string = $result->fetch_assoc();
+                // print_r($string);
+                echo $string["Create Table"];
             }
         ?>
 
