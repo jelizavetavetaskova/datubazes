@@ -88,36 +88,36 @@
     
                     break;
 
-                    case "3. vaicājums" : 
-                        $sql = "select nosaukums, cena from kursi";
-                        echo "<pre>"; 
-                        echo $sql;
-                        echo "</pre>";
-    
-                        $res = $conn->query($sql);
-                        $fieldnames = $res->fetch_fields();
+                case "3. vaicājums" : 
+                    $sql = "select nosaukums, cena from kursi where cena >= (select round(avg(cena), 2) from kursi)";
+                    echo "<pre>"; 
+                    echo $sql;
+                    echo "</pre>";
+
+                    $res = $conn->query($sql);
+                    $fieldnames = $res->fetch_fields();
                 
-                        echo "<table>";
+                    echo "<table>";
+                    echo "<tr>";
+                    foreach($fieldnames as $fieldname) {
+                        echo "<th>";
+                        echo $fieldname->name." ";
+                        echo "</th>";
+                    }
+                    echo "</tr>";
+                
+                    while ($row = $res->fetch_assoc()) {
                         echo "<tr>";
-                        foreach($fieldnames as $fieldname) {
-                            echo "<th>";
-                            echo $fieldname->name." ";
-                            echo "</th>";
+                        foreach($row as $data) {
+                            echo "<td>";
+                            echo $data;
+                            echo "</td>";
                         }
                         echo "</tr>";
                 
-                        while ($row = $res->fetch_assoc()) {
-                            echo "<tr>";
-                            foreach($row as $data) {
-                                echo "<td>";
-                                echo $data;
-                                echo "</td>";
-                            }
-                            echo "</tr>";
-                        }
-                        echo "</table>";
-    
-                        break;
+                    }
+                    echo "</table>";
+                    break;
                 
                 default: echo "Pēc nokluējuma";
             }
