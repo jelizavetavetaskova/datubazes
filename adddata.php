@@ -17,8 +17,8 @@
             $result = $conn->query($sql);
 
             echo '<form action="adddata2.php" method="post">
-                 <label for="tables">Izvēlieties tabulu:</label>
-                 <select name="tables">';
+                 <label for="table">Izvēlieties tabulu:</label>
+                 <select name="table">';
 
             while ($string = $result->fetch_assoc()) {
                 echo '<option value="'.$string["Tables_in_datorkursi3"].'">'.$string["Tables_in_datorkursi3"].'</option>';
