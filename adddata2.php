@@ -22,7 +22,6 @@
                 $sql=$sql.'"'.$_POST["field$i"].'", ';
             }
             $sql=$sql.'"'.$_POST["field$i"].'")';
-            echo "<br>Insert= ".$sql;
             $res_add = $conn->query($sql);
         }
 
@@ -50,14 +49,16 @@
         echo "</tr>";
 
         while ($row = $res->fetch_assoc()) {
+            echo '<form method="post">';
             echo "<tr>";
             foreach($row as $data) {
                 echo "<td>";
                 echo $data;
                 echo "</td>";
             }
-            echo "<td></td>";
+            echo '<td><input type="submit" name="delete" value="Dzest" class="width"></td>';
             echo "</tr>";
+            echo "</form>";
         }
 
         echo '<form action="" method="post">';
@@ -71,7 +72,7 @@
         // create hidden data, table name, number of columns
         echo '<input type="hidden" name="table" value="'.$table.'">';
         echo '<input type="hidden" name="num_of_col" value="'.$column_count.'">';
-        echo '<td><input type="submit" name="add" value="Pievienot"></td>';
+        echo '<td><input type="submit" name="add" value="Pievienot" class="width"></td>';
         echo "</tr>";
         echo '</form>';
         echo "</table>";
