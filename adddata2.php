@@ -10,12 +10,30 @@
     <a href="adddata.php">Atpakaļ</a>
 
     <?php
+        // if (!isset($_SESSION)) {
+        //     session_start();
+        // }
         require_once("config.php");
         $table = $_POST['table'];
         echo '<h1>Tabulas '.$table.' dati</h1>';
 
+        
+        /* if (isset($_SERVER['HTTP_CACHE_CONTROL'])) {
+            echo "Refresh";
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // $_SESSION['times'] = $_SESSION['times']++;
+                echo $_SESSION['times'];
+                unset($_POST);
+                // echo "POST:".$_POST['add'];
+                header("Location: ".$_SERVER['PHP_SELF']);
+                exit;
+            }
+        } */
+
         // if "Pievienot" was clicked
         if (isset($_POST["add"])) {
+            session_start();
+
             $table = $_POST['table'];
             $num_of_columns = $_POST["num_of_col"];
             $sql = "insert into $table values(null, ";
@@ -25,7 +43,7 @@
             $sql=$sql.'"'.$_POST["field$i"].'")';
             $res_add = $conn->query($sql);
             $_POST["add"] = "";
-        } // if
+        } // if 
 
         // if "Dzest" was clicked
         if (isset($_POST["delete"])) {
@@ -36,7 +54,6 @@
             $_POST["delete"] = "";
         } // if
 
-        
         // select data from table
         $sql="select * from ".$table.";";
         $res = $conn->query($sql);
@@ -46,12 +63,12 @@
         $column_count = $res->field_count;
         $sql="select max(id$table) from ".$table;
         $resmax = $conn->query($sql);
-        
+
         // set id to max+1
         $rowmax = $resmax->fetch_assoc();    
         $idmax = $rowmax["max(id$table)"];
         $idmax++;
-        
+
         // row with field names
         echo "<table>";
         echo "<tr>";
@@ -66,7 +83,7 @@
 
         // rows with data
         while ($row = $res->fetch_assoc()) {
-            echo '<form method="post">';
+            echo '<form method="post" onsubmit="alert('."'Ieraksts dzēsts!'".');">';
             echo "<tr>";
             $id = $row["id$table"];
             foreach($row as $data) {
@@ -76,37 +93,30 @@
             } // foreach
             echo '<input type="hidden" name="id" value="'.$id.'">';
             echo '<input type="hidden" name="table" value="'.$table.'">';
-            echo '<td><input type="submit" name="delete" value="Dzest" class="width" onclick="showMessageDeleted()"></td>';
+            echo '<td><input type="submit" name="delete" value="Dzest" class="width" ></td>';
             echo "</tr>";
             echo "</form>";
         } // while
 
         // row for data adding
-        echo '<form action="" method="post">';
-        echo "<tr>";
-        echo "<td>$idmax</td>";
-        for ($i = 2; $i<=$column_count; $i++) {
-            echo "<td>";
-            echo '<input type="text" name="field'.$i.'" value="">';
-            echo "</td>";
-        } // for
-        // create hidden data, table name, number of columns
-        echo '<input type="hidden" name="table" value="'.$table.'">';
-        echo '<input type="hidden" name="num_of_col" value="'.$column_count.'">';
-        echo '<td><input type="submit" name="add" value="Pievienot" class="width" onclick="showMessageAdded()"></td>';
-        echo "</tr>";
-        echo '</form>';
-        echo "</table>";
-    
-        ?> 
+    ?>
 
-        <script>
-            function showMessageDeleted() {
-                alert("Ieraksts tika dzēsts");
-            }
-            function showMessageAdded() {
-                alert("Ieraksts tika pievienots");
-            }
-        </script>
+        <form action="" method="post" onsubmit="alert('Ieraksts pievienots!');">;
+            <?php
+                echo "<tr>";
+                echo "<td>$idmax</td>";
+                for ($i = 2; $i<=$column_count; $i++) {
+                    echo "<td>";
+                    echo '<input type="text" name="field'.$i.'" value="">';
+                    echo "</td>";
+                } // for
+                // create hidden data, table name, number of columns
+                echo '<input type="hidden" name="table" value="'.$table.'">';
+                echo '<input type="hidden" name="num_of_col" value="'.$column_count.'">';
+                echo '<td><input type="submit" name="add" value="Pievienot" class="width"></td>';
+                echo "</tr>";
+                echo '</form>';
+                echo "</table>";
+            ?>
 </body>
 </html>
