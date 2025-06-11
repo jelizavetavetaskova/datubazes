@@ -10,11 +10,20 @@
     <a href="adddata.php">Atpakaļ</a>
 
     <?php
-        // if (!isset($_SESSION)) {
-        //     session_start();
-        // }
-        require_once("config.php");
-        $table = $_POST['table'];
+        // if (session_id() === '') {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+            require_once("config.php");
+            $table = $_POST['table'];
+            $_SESSION['table'] = $table;
+            $_SESSION['times'] = 0;
+        }
+        else {
+            $_SESSION['times'] = 1;
+        }
+        {
+            $table = $_SESSION['table'];
+        
         echo '<h1>Tabulas '.$table.' dati</h1>';
 
         
@@ -31,7 +40,7 @@
         } */
 
         // if "Pievienot" was clicked
-        if (isset($_POST["add"])) {
+        if (isset($_POST["add"]) and $_SESSION['times'] == 0) {
             session_start();
 
             $table = $_POST['table'];
@@ -43,6 +52,10 @@
             $sql=$sql.'"'.$_POST["field$i"].'")';
             $res_add = $conn->query($sql);
             $_POST["add"] = "";
+
+            //header("Location: ".$_SERVER['PHP_SELF']);
+            //exit;
+            
         } // if 
 
         // if "Dzest" was clicked
@@ -114,9 +127,12 @@
                 echo '<input type="hidden" name="table" value="'.$table.'">';
                 echo '<input type="hidden" name="num_of_col" value="'.$column_count.'">';
                 echo '<td><input type="submit" name="add" value="Pievienot" class="width"></td>';
+                $_SESSION['times'] = 1;
                 echo "</tr>";
                 echo '</form>';
-                echo "</table>";
+                echo "</table>";}
+                // $_SESSION['table'] = null;
+                // session_destroy();
             ?>
 </body>
 </html>
